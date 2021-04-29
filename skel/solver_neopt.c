@@ -28,7 +28,7 @@ double *my_solver(int N, double *A, double* B) {
     /* A * B*/
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
-            for (k = j; k < N; k++) {
+            for (k = 0; k < N; k++) {
                 AB[i * N + j] += A[i * N + k] * B[k * N + j];
             }
         }
@@ -36,8 +36,8 @@ double *my_solver(int N, double *A, double* B) {
 
     /* AB * B transpose */
     for (i = 0; i < N; i++) {
-        for (j = i; j < N; j++) {
-            for (k = i; k < N; k++) {
+        for (j = 0; j < N; j++) {
+            for (k = 0; k < N; k++) {
                 ABBt[i * N + j] += AB[i * N + k] * B[j * N + k];
             }
         }
@@ -61,7 +61,6 @@ double *my_solver(int N, double *A, double* B) {
     free(AB);
     free(ABBt);
     free(AtA);
-    free(C);
 
     return C;
 }
