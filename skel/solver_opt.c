@@ -51,7 +51,7 @@ double* my_solver(int N, double *A, double* B) {
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
             double register sum = 0;
-            for (k = i; k < N; k++) {
+            for (k = 0; k < N; k++) {
                 sum += A[k * N + i] * A[k * N + j];
             }
             AtA[i * N + j] = sum;
