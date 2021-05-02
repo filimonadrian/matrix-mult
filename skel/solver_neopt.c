@@ -44,6 +44,16 @@ double *my_solver(int N, double *A, double* B) {
     }
 
     /* A transpose * A */
+    /* every element ^2 */
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+            /* AtA[i * N + j] += ((A[i * N + j] * 1000) * (A[i * N + j] * 1000)) / 1000;
+             */
+            AtA[i * N + j] += A[i * N + j] * A[i * N + j];
+
+        }
+    }
+    /*
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
             for (k = 0; k < N; k++) {
@@ -51,6 +61,7 @@ double *my_solver(int N, double *A, double* B) {
             }
         }
     }
+    */
 
     /* C = */
     for (i = 0; i < N; i++) {

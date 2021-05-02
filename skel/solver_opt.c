@@ -1,12 +1,12 @@
 /*
- * Tema 2 ASC
- * 2021 Spring
- */
+ *  * Tema 2 ASC
+ *   * 2021 Spring
+ *    */
 #include "utils.h"
 
 /*
- * Add your optimized implementation here
- */
+ *  * Add your optimized implementation here
+ *   */
 
 void allocate_matrix(int N, double **AB, double **ABBt,
                         double **AtA, double **C) {
