@@ -2,6 +2,8 @@
  *  * Tema 2 ASC
  *   * 2021 Spring
  *    */
+#define MIN(a,b) (((a)<(b))?(a):(b))
+
 #include "utils.h"
 
 /*
@@ -51,13 +53,13 @@ double* my_solver(int N, double *A, double* B) {
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
             double register sum = 0;
-            for (k = 0; k < N; k++) {
+            for (k = 0; k < MIN(i, j); k++) {
                 sum += A[k * N + i] * A[k * N + j];
             }
             AtA[i * N + j] = sum;
-
         }
     }
+
     /* C = */
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
