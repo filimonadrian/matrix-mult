@@ -12,64 +12,75 @@
 
 */
 
-/* 
- * Add your BLAS implementation here
- */
-
 void allocate_matrix(int N, double **AB, double **ABBt,
                         double **AtA, double **C) {
 
-    *AB = calloc (N * N, sizeof (double));
+    *AB = calloc (N * N, sizeof (**AB));
     *ABBt = calloc (N * N, sizeof (double));
-    *AtA = calloc (N * N, sizeof (double));
-    *C = calloc (N * N, sizeof (double));
+    *AtA = calloc (N * N, sizeof (**AtA));
+    *C = calloc (N * N, sizeof (**C));
 }
 
 
-double* my_solver(int N, double *A, double *B) {
+double *my_solver(int N, double *A, double *B) {
     double *AB, *ABBt, *AtA, *C;
-    register int i, j;
+    register int i, j, k;
 
     allocate_matrix(N, &AB, &ABBt, &AtA, &C);
 
-    memcpy(C, B, N * N * sizeof(*C));
+    /* AB = A * B */
+    memcpy(AB, B, N * N * sizeof(*AB));
     cblas_dtrmm(CblasRowMajor,
                 CblasLeft,
                 CblasUpper,
                 CblasNoTrans,
                 CblasNonUnit,
-                N, N,
-                1.0, A, N,
-                C, N);
+                N, N, 1.0,
+                A, N,
+                AB, N);
 
-    cblas_dtrmm(CblasRowMajor,
-                CblasRight,
-                CblasUpper,
+    /* ABBt = A * B * B' = AB * B' */
+    memcpy(ABBt, AB, N * N * sizeof(*AB));
+    cblas_dgemm(CblasRowMajor,
+                CblasNoTrans,
                 CblasTrans,
-                CblasNonUnit,
-                N, N,
-                1.0, B, N,
-                C, N);
+                N, N, N, 1.0,
+                AB, N,
+                B, N,
+                0.0, ABBt, N);
+    // cblas_dtrmm(CblasRowMajor,
+    //             CblasRight,
+    //             CblasUpper,
+    //             CblasTrans,
+    //             CblasNonUnit,
+    //             N, N, 1,
+    //             B, N,
+    //             ABBt, N);
 
+    /* AtA = A' * A */
     memcpy(AtA, A, N * N * sizeof(*A));
     cblas_dtrmm(CblasRowMajor,
                 CblasLeft,
                 CblasUpper,
                 CblasTrans,
                 CblasNonUnit,
-                N, N,
-                1.0, A, N,
+                N, N, 1.0,
+                A, N,
                 AtA, N);
 
 
+    /* C = AtA + ABBt */
+    k = 0;
+    k++;
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
-            C[i * N + j] += AtA[i * N + j]; 
+            C[i * N + j] = AtA[i * N + j] + ABBt[i * N + j];
         }
     }
 
     free(AB);
     free(ABBt);
     free(AtA);
+
     return C;
 }
