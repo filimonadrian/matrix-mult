@@ -1,0 +1,78 @@
+==32591== Memcheck, a memory error detector
+==32591== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==32591== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==32591== Command: ./tema2_opt_m /export/asc/tema2/input_valgrind
+==32591== Parent PID: 32538
+==32591== 
+--32591-- 
+--32591-- Valgrind options:
+--32591--    --leak-check=full
+--32591--    --show-leak-kinds=all
+--32591--    --track-origins=yes
+--32591--    --verbose
+--32591--    --log-file=opt.memory
+--32591-- Contents of /proc/version:
+--32591--   Linux version 3.10.0-327.28.3.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc version 4.8.3 20140911 (Red Hat 4.8.3-9) (GCC) ) #1 SMP Thu Aug 18 19:05:49 UTC 2016
+--32591-- 
+--32591-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-ssse3
+--32591-- Page sizes: currently 4096, max supported 4096
+--32591-- Valgrind library directory: /usr/libexec/valgrind
+--32591-- Reading syms from /export/home/acs/stud/c/costel.filimon/Documents/tema2/matrix-mult/skel/tema2_opt_m
+--32591-- Reading syms from /usr/lib64/ld-2.17.so
+--32591-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--32591--    object doesn't have a symbol table
+--32591--    object doesn't have a dynamic symbol table
+--32591-- Scheduler: using generic scheduler lock implementation.
+--32591-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==32591== embedded gdbserver: reading from /scratch/tmp/1247075.1.ibm-nehalem.q/vgdb-pipe-from-vgdb-to-32591-by-costel.filimon-on-nehalem-wn15.grid.pub.ro
+==32591== embedded gdbserver: writing to   /scratch/tmp/1247075.1.ibm-nehalem.q/vgdb-pipe-to-vgdb-from-32591-by-costel.filimon-on-nehalem-wn15.grid.pub.ro
+==32591== embedded gdbserver: shared mem   /scratch/tmp/1247075.1.ibm-nehalem.q/vgdb-pipe-shared-mem-vgdb-32591-by-costel.filimon-on-nehalem-wn15.grid.pub.ro
+==32591== 
+==32591== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==32591== don't want to do, unless you know exactly what you're doing,
+==32591== or are doing some strange experiment):
+==32591==   /usr/libexec/valgrind/../../bin/vgdb --pid=32591 ...command...
+==32591== 
+==32591== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==32591==   /path/to/gdb ./tema2_opt_m
+==32591== and then give GDB the following command
+==32591==   target remote | /usr/libexec/valgrind/../../bin/vgdb --pid=32591
+==32591== --pid is optional if only one valgrind process is running
+==32591== 
+--32591-- REDIR: 0x4019f70 (ld-linux-x86-64.so.2:strlen) redirected to 0x580c7ed5 (???)
+--32591-- REDIR: 0x4019d40 (ld-linux-x86-64.so.2:index) redirected to 0x580c7eef (???)
+--32591-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--32591-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+==32591== WARNING: new redirection conflicts with existing -- ignoring it
+--32591--     old: 0x04019f70 (strlen              ) R-> (0000.0) 0x580c7ed5 ???
+--32591--     new: 0x04019f70 (strlen              ) R-> (2007.0) 0x04c2d1b0 strlen
+--32591-- REDIR: 0x4019ef0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c2e300 (strcmp)
+--32591-- REDIR: 0x401aae0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c31f90 (mempcpy)
+--32591-- Reading syms from /usr/lib64/libc-2.17.so
+--32591-- REDIR: 0x4ec6e40 (libc.so.6:strcasecmp) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--32591-- REDIR: 0x4ec3bc0 (libc.so.6:strnlen) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--32591-- REDIR: 0x4ec9110 (libc.so.6:strncasecmp) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--32591-- REDIR: 0x4ec6620 (libc.so.6:memset) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--32591-- REDIR: 0x4ec65d0 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--32591-- REDIR: 0x4ec55b0 (libc.so.6:__GI_strrchr) redirected to 0x4c2cb70 (__GI_strrchr)
+--32591-- REDIR: 0x4ebc800 (libc.so.6:malloc) redirected to 0x4c29eec (malloc)
+--32591-- REDIR: 0x4edc630 (libc.so.6:__GI_strstr) redirected to 0x4c32220 (__strstr_sse2)
+--32591-- REDIR: 0x4ebcc20 (libc.so.6:free) redirected to 0x4c2afe6 (free)
+--32591-- REDIR: 0x4ebd210 (libc.so.6:calloc) redirected to 0x4c2bff3 (calloc)
+--32591-- REDIR: 0xffffffffff600000 (???:???) redirected to 0x580c7eb7 (???)
+--32591-- REDIR: 0x4ecb7e0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--32591-- REDIR: 0x4f8b3a0 (libc.so.6:__memcpy_ssse3_back) redirected to 0x4c2e7b0 (memcpy@@GLIBC_2.14)
+--32591-- REDIR: 0x4ecd0d0 (libc.so.6:strchrnul) redirected to 0x4c31ab0 (strchrnul)
+--32591-- REDIR: 0x4ec67f0 (libc.so.6:__GI_mempcpy) redirected to 0x4c31cc0 (__GI_mempcpy)
+--32591-- REDIR: 0x4ecb850 (libc.so.6:__GI_memcpy) redirected to 0x4c2efb0 (__GI_memcpy)
+--32591-- REDIR: 0x4ec3ae0 (libc.so.6:__GI_strlen) redirected to 0x4c2d110 (__GI_strlen)
+--32591-- REDIR: 0x4ec2040 (libc.so.6:strcmp) redirected to 0x4a247a0 (_vgnU_ifunc_wrapper)
+--32591-- REDIR: 0x4f756f0 (libc.so.6:__strcmp_sse42) redirected to 0x4c2e2b0 (__strcmp_sse42)
+==32591== 
+==32591== HEAP SUMMARY:
+==32591==     in use at exit: 0 bytes in 0 blocks
+==32591==   total heap usage: 8 allocs, 8 frees, 7,680,676 bytes allocated
+==32591== 
+==32591== All heap blocks were freed -- no leaks are possible
+==32591== 
+==32591== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
