@@ -24,7 +24,7 @@ void allocate_matrix(int N, double **AB, double **ABBt,
 
 double *my_solver(int N, double *A, double *B) {
     double *AB, *ABBt, *AtA, *C;
-    register int i, j, k;
+    register int i, j;
 
     allocate_matrix(N, &AB, &ABBt, &AtA, &C);
 
@@ -70,8 +70,6 @@ double *my_solver(int N, double *A, double *B) {
 
 
     /* C = AtA + ABBt */
-    k = 0;
-    k++;
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
             C[i * N + j] = AtA[i * N + j] + ABBt[i * N + j];

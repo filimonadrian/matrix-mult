@@ -6,10 +6,6 @@
 
 #include "utils.h"
 
-/*
- *  * Add your optimized implementation here
- *   */
-
 void allocate_matrix(int N, double **AB, double **ABBt,
                         double **AtA, double **C) {
 
@@ -27,7 +23,7 @@ double* my_solver(int N, double *A, double* B) {
 
     allocate_matrix(N, &AB, &ABBt, &AtA, &C);
 
-    /* A * B*/
+    /* AB = A * B */
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
             register double sum = 0.0;
@@ -38,7 +34,7 @@ double* my_solver(int N, double *A, double* B) {
         }
     }
 
-    /* AB * B transpose */
+    /* ABBt = A * B * B' = AB * B' */
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
             register double sum = 0.0;
@@ -49,18 +45,18 @@ double* my_solver(int N, double *A, double* B) {
         }
     }
 
-    /* A transpose * A */
+    /* AtA = A' * A */
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
             double register sum = 0;
-            for (k = 0; k < MIN(i, j); k++) {
+            for (k = 0; k <= MIN(i, j); k++) {
                 sum += A[k * N + i] * A[k * N + j];
             }
             AtA[i * N + j] = sum;
         }
     }
 
-    /* C = */
+    /* C = AtA + ABBt */
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
             C[i * N + j] = ABBt[i * N + j] + AtA[i * N + j];
