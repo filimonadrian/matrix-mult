@@ -5,12 +5,6 @@
 #include <string.h>
 #include <cblas.h>
 #include "utils.h"
-/* resources:
-    http://www.netlib.org/blas/cblas.h
-    http://www.netlib.org/lapack/explore-html/de/da0/cblas_8h_source.html
-    https://www.gnu.org/software/gsl/doc/html/blas.html#c.gsl_blas_dtrmm
-
-*/
 
 void allocate_matrix(int N, double **AB, double **ABBt,
                         double **AtA, double **C) {
@@ -20,7 +14,6 @@ void allocate_matrix(int N, double **AB, double **ABBt,
     *AtA = calloc (N * N, sizeof (**AtA));
     *C = calloc (N * N, sizeof (**C));
 }
-
 
 double *my_solver(int N, double *A, double *B) {
     double *AB, *ABBt, *AtA, *C;
@@ -48,14 +41,6 @@ double *my_solver(int N, double *A, double *B) {
                 AB, N,
                 B, N,
                 0.0, ABBt, N);
-    // cblas_dtrmm(CblasRowMajor,
-    //             CblasRight,
-    //             CblasUpper,
-    //             CblasTrans,
-    //             CblasNonUnit,
-    //             N, N, 1,
-    //             B, N,
-    //             ABBt, N);
 
     /* AtA = A' * A */
     memcpy(AtA, A, N * N * sizeof(*A));
@@ -67,7 +52,6 @@ double *my_solver(int N, double *A, double *B) {
                 N, N, 1.0,
                 A, N,
                 AtA, N);
-
 
     /* C = AtA + ABBt */
     for (i = 0; i < N; i++) {
